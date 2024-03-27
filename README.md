@@ -1,29 +1,31 @@
-# test
+# 计算机原理可视化项目
 
-This template should help get you started developing with Vue 3 in Vite.
+## 项目概述
 
-## Recommended IDE Setup
+计算机原理可视化项目是一个以 HTML5 技术为基础，利用 Vue.js 前端框架实现的一个 Web 应用。它旨在通过可视化的方式，帮助用户理解计算机的基本工作原理和流程，包括数据和指令的处理，以及从高级语言到二进制代码的编译过程。
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## 主要功能
 
-## Customize configuration
+1. **二进制原理展示**：项目将展示二进制（数据和代码）的基本原理，包括整数（补码）和浮点数的表示方法，以及指令集设计原理。
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+2. **计算机模型展示**：项目将展示以内存为中心的程序员视角的计算机模型，包括计算机加电开机的过程模型，内存编址和分段（Segment），以及处理器计算和 I/O 的过程。
 
-## Project Setup
+3. **代码执行流程展示**：项目将展示基于 "JUMP" 的代码执行 "顺序、分支、循环" 的三个基本流程。
 
-```sh
-npm install
-```
+4. **编译过程展示**：项目将展示从高级语言到二进制代码的编译过程，以及具有运行时环境（如 JRE）的代码运行过程。
 
-### Compile and Hot-Reload for Development
+## 加分项
 
-```sh
-npm run dev
-```
+1. **指令集和二进制的对应关系**：参考 MIPS 或者 RISC-V 指令集规范，完整演示指令集和二进制的对应关系。
 
-### Compile and Minify for Production
+2. **中间代码的编译和运行过程**：参考 Java ByteCode、.Net IL 等中间代码规范，完整演示中间代码的编译和运行过程。
 
-```sh
-npm run build
-```
+3. **开机过程演示**：参考 X86 计算机开机的地址规范，演示开机过程。
+
+## 技术栈
+
+该项目使用 HTML5 和 Vue.js 作为主要开发技术，可能会结合使用 JQuery、Bootstrap 等成熟的前端框架来提高开发效率和用户体验。
+
+## 项目目标
+
+通过本项目，我们希望能够帮助用户更好地理解计算机的工作原理，从而提高他们的计算机科学知识和技能。同时，我们也希望这个项目能够成为一个有用的教育工具，帮助教师在教学过程中更好地解释和展示复杂的计算机原理。
