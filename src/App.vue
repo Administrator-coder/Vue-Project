@@ -29,7 +29,7 @@
               </el-menu-item>  
               <el-menu-item index="1-2-3">
                 <router-link to="/1-2-3" style="text-decoration: none;">
-                  计算机内存编址和分段
+                  计算机内存编址和分段与分页
                 </router-link>
               </el-menu-item>
               <el-menu-item index="1-2-4">
@@ -42,7 +42,7 @@
               <template #title>代码执行流程展示</template>
               <el-menu-item index="1-3-1">
                 <router-link to="/1-3-1" style="text-decoration: none;">
-                  基于“JUMP”的代码执行流程
+                  基于“JMP”的代码执行流程
                 </router-link>
               </el-menu-item>
             </el-sub-menu>
@@ -50,11 +50,28 @@
               <template #title>从高级语言到二进制代码的编译过程展示</template>
               <el-menu-item index="1-4-1">
                 <router-link to="/1-4-1" style="text-decoration: none;">
-                  具有运行时环境的代码运行过程
+                  高级语言->RISC-V指令集
+                </router-link>
+              </el-menu-item>
+              <el-menu-item index="1-4-2">
+                <router-link to="/1-4-2" style="text-decoration: none;">
+                  RISC-V指令集->二进制
+                </router-link>
+              </el-menu-item>
+              <el-menu-item index="1-4-3">
+                <router-link to="/1-4-3" style="text-decoration: none;">
+                  运行时环境（JRE）
                 </router-link>
               </el-menu-item>
             </el-sub-menu>
-            
+            <el-sub-menu index="1-5"> 
+              <template #title>Java ByteCode</template>
+              <el-menu-item index="1-5-1">
+                <router-link to="/1-5-1" style="text-decoration: none;">
+                  Java ByteCode
+                </router-link>
+              </el-menu-item>
+            </el-sub-menu>
           </el-sub-menu>
           
         </el-menu>

@@ -100,8 +100,50 @@
             段内偏移量：<el-input v-model.number="offset" placeholder="请输入段内偏移量" style="width: 200px;"></el-input>
         </div>
         <div>物理地址：{{ sum }}</div>
+        <h4 style="text-align: center;">内存碎片问题</h4>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;内存碎片是指内存中的一些不连续的空闲区域，这些空闲区域太小，无法被分配给需要的进程。内存碎片会导致内存利用率降低，进程分配内存的效率下降，甚至可能导致内存分配失败。</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们来看看这样一个例子。假设有 1G 的物理内存，用户执行了多个程序，其中：</p>
+        <ul>
+            <li>游戏占用了 512MB 内存</li>
+            <li>浏览器占用了 128MB 内存</li>
+            <li>音乐占用了 256 MB 内存。</li>
+        </ul>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个时候，如果我们关闭了浏览器，则空闲内存还有 1024 - 512 - 256 = 256MB。</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果这个 256MB 不是连续的，被分成了两段 128 MB 内存，这就会导致没有空间再打开一个 200MB 的程序。</p>
+        <img src="../assets/ncfdproblem.png" style="display: block; margin: auto; width: 100%;">
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里的内存碎片的问题共有两处地方：</p>
+        <ul>
+            <li>外部内存碎片，也就是产生了多个不连续的小物理内存，导致新的程序无法被装载；</li>
+            <li>内部内存碎片，程序所有的内存都被装载到了物理内存，但是这个程序有部分的内存可能并不是很常使用，这也会导致内存的浪费；</li>
+        </ul>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;解决外部内存碎片的问题就是<strong>内存交换</strong>。</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可以把音乐程序占用的那 256MB 内存写到硬盘上，然后再从硬盘上读回来到内存里。不过再读回的时候，我们不能装载回原来的位置，而是紧紧跟着那已经被占用了的 512MB 内存后面。这样就能空缺出连续的 256MB 空间，于是新的 200MB 程序就可以装载进来。</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;因为硬盘的访问速度要比内存慢太多了，每一次内存交换，我们都需要把一大段连续的内存数据写到硬盘上。</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所以，<strong>如果内存交换的时候，交换的是一个占内存空间很大的程序，这样整个机器都会显得卡顿。</strong></p>
+        <button @click="showSolution0 = !showSolution0"> How to Solve ? </button>
     </div>
-    
+    <h1 v-if="showSolution0" style="text-align: center;">内存分页</h1>
+    <div v-if="showSolution0" class="info-box">
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>分页是把整个虚拟和物理内存空间切成一段段固定尺寸的大小</strong>。这样一个连续并且尺寸固定的内存空间，我们叫<strong>页</strong>（<em>Page</em>）。<strong>在 Linux 下，每一页的大小为&nbsp;<code>4KB</code>。</strong></p>
+        <p>虚拟地址与物理地址之间通过<strong>页表</strong>来映射，如下图：</p>
+        <img src="../assets/ybys.png" style="display: block; margin: auto; width: 100%;">
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页表实际上存储在 CPU 的<strong>内存管理单元</strong>&nbsp;（<em>MMU</em>） 中，于是 CPU 就可以直接通过 MMU，找出要实际要访问的物理内存地址。</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;而当进程访问的虚拟地址在页表中查不到时，系统会产生一个<strong>缺页异常</strong>，进入系统内核空间分配物理内存、更新进程页表，最后再返回用户空间，恢复进程的运行。</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由于内存空间都是预先划分好的，也就不会像分段会产生间隙非常小的内存，这正是分段会产生内存碎片的原因。而<strong>采用了分页，那么释放的内存都是以页为单位释放的，也就不会产生无法给进程使用的小内存。</strong></p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果内存空间不够，操作系统会把其他正在运行的进程中的「最近没被使用」的内存页面给释放掉，也就是暂时写在硬盘上，称为<strong>换出</strong>（<em>Swap Out</em>）。一旦需要的时候，再加载进来，称为<strong>换入</strong>（<em>Swap In</em>）。所以，一次性写入磁盘的也只有少数的一个页或者几个页，不会花太多时间，<strong>内存交换的效率就相对比较高。</strong></p>
+        <img src="../assets/hrhc.png" style="display: block; margin: auto; width: 100%;">
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;更进一步地，分页的方式使得我们在加载程序的时候，不再需要一次性都把程序加载到物理内存中。我们完全可以在进行虚拟内存和物理内存的页之间的映射之后，并不真的把页加载到物理内存里，而是<strong>只有在程序运行中，需要用到对应虚拟内存页里面的指令和数据时，再加载到物理内存里面去。</strong></p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在分页机制下，虚拟地址分为两部分，<strong>页号</strong>和<strong>页内偏移</strong>。页号作为页表的索引，<strong>页表</strong>包含物理页每页所在<strong>物理内存的基地址</strong>，这个基地址与页内偏移的组合就形成了物理内存地址，见下图。</p>
+        <img src="../assets/ncfyxz.png" style="display: block; margin: auto; width: 100%;">
+        <p>总结一下，对于一个内存地址转换，其实就是这样三个步骤：</p>
+        <ul>
+            <li>把虚拟内存地址，切分成页号和偏移量；</li>
+            <li>根据页号，从页表里面，查询对应的物理页号；</li>
+            <li>直接拿物理页号，加上前面的偏移量，就得到了物理内存地址。</li>
+        </ul>
+        <p>下面举个例子，虚拟内存中的页通过页表映射为了物理内存中的页，如下图：</p>
+        <img src="../assets/nnywlyys.png" style="display: block; margin: auto; width: 100%;">
+    </div>
 </template>
   
 <script>
@@ -167,6 +209,7 @@ export default {
         selected: '',
         showInput: false,
         showSolution: false,
+        showSolution0: false,
         selector: 0,
         offset: 0,
         off: 11,

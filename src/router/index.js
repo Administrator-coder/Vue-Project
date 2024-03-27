@@ -50,9 +50,24 @@ const router = createRouter({
       component: () => import('../views/StageView1-3-1.vue')
     },
     {
+      path: '/1-4-3',
+      name: '1-4-3',
+      component: () => import('../views/StageView1-4-3.vue')
+    },
+    {
       path: '/1-4-1',
       name: '1-4-1',
       component: () => import('../views/StageView1-4-1.vue')
+    },
+    {
+      path: '/1-4-2',
+      name: '1-4-2',
+      component: () => import('../views/StageView1-4-2.vue')
+    },
+    {
+      path: '/1-5-1',
+      name: '1-5-1',
+      component: () => import('../views/StageView1-5-1.vue')
     }
   ]
 })
