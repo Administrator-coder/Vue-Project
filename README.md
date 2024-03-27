@@ -242,19 +242,33 @@
 ## 参考资料
 
 一个 Vue 3 UI 框架 | Element Plus：https://element-plus.gitee.io/zh-CN/
+
 简介 | Vue.js：https://cn.vuejs.org/guide/introduction.html
+
 RISC-V指令集：https://blog.csdn.net/m0_47329175/article/details/127160108
+
 第1章 初识RISC-V - Wahahahehehe：https://www.cnblogs.com/wahahahehehe/p/15574316.html
+
 首页 - boardmix：https://boardmix.cn/app/home
+
 计算机开机启动过程详解：https://blog.csdn.net/weixin_44984664/article/details/104524792
+
 iconfont-阿里巴巴矢量图标库：https://www.iconfont.cn/
+
 深入理解计算机系统（第3章 程序的机器级表示③：https://www.cnblogs.com/kirin-dev/p/Computer-Systems_Chapter-3-3.html#tid-556EkR
+
 操作系统（八）——虚拟内存、内存分段和内存分页：https://blog.csdn.net/www_dong/article/details/115984208?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522171152507016777224445671%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&request_id=171152507016777224445671&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-8-115984208-null-null.nonecase&utm_term=%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F&spm=1018.2226.3001.4450
+
 计算机操作系统学习笔记（四）：设备管理 — I/O 管理：https://zhuanlan.zhihu.com/p/331646965
+
 Java字节码介绍：https://blog.csdn.net/qq_40124555/article/details/128403015
+
 什么是JRE？ Java运行时环境简介：https://blog.csdn.net/hbkzhu13579/article/details/103889768
 
 ## 鸣谢
+
 参考**孙更欣**的在线编辑器，学习了对Compiler Explorer 的 API调用方法。
+
 参考**侯博涵**学长给出的设计建议。
+
 参考Chat GPT 给出的设计建议。
