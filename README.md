@@ -185,7 +185,7 @@
 
 #### 高级语言->RISC-V指令集
 
-这个项目是一个基于 Vue.js 和 Element UI 的在线 编译器。它使用了 Compiler Explorer 的 API，用户可以选择不同的编程语言和编译器，输入源代码，点击按钮编译源代码，查看编译后的汇编代码。
+这个项目是一个基于 Vue.js 和 Element UI 的在线编译器。它使用了 Compiler Explorer 的 API，用户可以选择不同的编程语言和编译器，输入源代码，点击按钮编译源代码，查看编译后的汇编代码。
 
 该项目主要由一个 Vue 组件构成，该组件包含以下部分：
 
@@ -253,3 +253,8 @@ iconfont-阿里巴巴矢量图标库：https://www.iconfont.cn/
 计算机操作系统学习笔记（四）：设备管理 — I/O 管理：https://zhuanlan.zhihu.com/p/331646965
 Java字节码介绍：https://blog.csdn.net/qq_40124555/article/details/128403015
 什么是JRE？ Java运行时环境简介：https://blog.csdn.net/hbkzhu13579/article/details/103889768
+
+## 鸣谢
+参考**孙更欣**的在线编辑器，学习了对Compiler Explorer 的 API调用方法。
+参考**侯博涵**学长给出的设计建议。
+参考Chat GPT 给出的设计建议。
